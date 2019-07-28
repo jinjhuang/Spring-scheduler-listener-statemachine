@@ -1,6 +1,6 @@
 package com.tw.techops.dp.api.eda.controller;
 
-import com.tw.techops.dp.api.eda.event.ApiEventType;
+import com.tw.techops.dp.api.eda.event.ApiStateChangeType;
 import com.tw.techops.dp.api.eda.model.Api;
 import com.tw.techops.dp.api.eda.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
 
     @Autowired
-    private ApiService apiStateService;
+    private ApiService apiService;
 
     public void createApi(Api api){
-        apiStateService.create(api);
+        apiService.create(api);
     }
 
-    public void updateApi(Api api, ApiEventType eventType){
-        apiStateService.update(api,eventType);
+    public void updateApi(Api api, ApiStateChangeType eventType){
+        apiService.update(api,eventType);
     }
 
-    public Api getApiById(String name){
-        return apiStateService.getByName(name);
+    public Api getApiByName(String name){
+        return apiService.getByName(name);
     }
 }

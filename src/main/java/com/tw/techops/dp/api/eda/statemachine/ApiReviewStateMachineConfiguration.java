@@ -1,6 +1,6 @@
 package com.tw.techops.dp.api.eda.statemachine;
 
-import com.tw.techops.dp.api.eda.event.ApiReviewEventType;
+import com.tw.techops.dp.api.eda.event.ApiReviewStateChangeType;
 import com.tw.techops.dp.api.eda.state.ApiReviewState;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachine;
@@ -12,9 +12,9 @@ import java.util.EnumSet;
 
 @Configuration
 @EnableStateMachine(name = "apiReviewStateMachine")
-public class ApiReviewStateMachineConfiguration extends StateMachineConfigurerAdapter<ApiReviewState, ApiReviewEventType> {
+public class ApiReviewStateMachineConfiguration extends StateMachineConfigurerAdapter<ApiReviewState, ApiReviewStateChangeType> {
     @Override
-    public void configure(StateMachineStateConfigurer<ApiReviewState, ApiReviewEventType> states)
+    public void configure(StateMachineStateConfigurer<ApiReviewState, ApiReviewStateChangeType> states)
             throws Exception {
 
         states.withStates()
@@ -25,8 +25,8 @@ public class ApiReviewStateMachineConfiguration extends StateMachineConfigurerAd
     }
 
     @Override
-    public void configure(StateMachineTransitionConfigurer<ApiReviewState, ApiReviewEventType> transitions) throws Exception {
-        for (ApiReviewEventType eventType : ApiReviewEventType.values()) {
+    public void configure(StateMachineTransitionConfigurer<ApiReviewState, ApiReviewStateChangeType> transitions) throws Exception {
+        for (ApiReviewStateChangeType eventType : ApiReviewStateChangeType.values()) {
             transitions = transitions.withExternal()
                     .source(eventType.getSourceState())
                     .target(eventType.getTargetState())
